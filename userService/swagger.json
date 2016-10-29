@@ -1,0 +1,452 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "User Service",
+    "description": "Performs the create/read/update/delete (CRUD) operations on a user resource as well as fascilitate user logins"
+  },
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "description": "Get all users in the database",
+        "responses": {
+          "200": {
+            "description": "successful response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "_id",
+                  "first",
+                  "last",
+                  "phone",
+                  "email",
+                  "password"
+                ],
+                "properties": {
+                  "_id": {
+                    "description": "The id of the user",
+                    "type": "string"
+                  },
+                  "first": {
+                    "description": "The first name of the user",
+                    "type": "string"
+                  },
+                  "last": {
+                    "description": "The last name of the user",
+                    "type": "string"
+                  },
+                  "phone": {
+                    "description": "The phone number of the user",
+                    "type": "integer"
+                  },
+                  "email": {
+                    "description": "The email of the user",
+                    "type": "string"
+                  },
+                  "password": {
+                    "description": "The password of the user",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "no users in the database"
+          },
+          "400": {
+            "description": "invalid request"
+          },
+          "500": {
+            "description": "databse error"
+          }
+        }
+      },
+      "post": {
+        "description": "add a user into the database",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "required": true,
+            "description": "user info",
+            "schema": {
+              "type": "object",
+              "required": [
+                "first",
+                "last",
+                "phone",
+                "email",
+                "password"
+              ],
+              "properties": {
+                "_id": {
+                  "description": "The id of the user",
+                  "type": "string"
+                },
+                "first": {
+                  "description": "The first name of the user",
+                  "type": "string"
+                },
+                "last": {
+                  "description": "The last name of the user",
+                  "type": "string"
+                },
+                "phone": {
+                  "description": "The phone number of the user",
+                  "type": "integer"
+                },
+                "email": {
+                  "description": "The email of the user",
+                  "type": "string"
+                },
+                "password": {
+                  "description": "The password of the user",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "user added",
+            "headers": {
+              "location": {
+                "description": "id retured by the database",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "type": "object",
+              "required": [
+                "first",
+                "last",
+                "phone",
+                "email",
+                "password"
+              ],
+              "properties": {
+                "_id": {
+                  "description": "The id of the user",
+                  "type": "string"
+                },
+                "first": {
+                  "description": "The first name of the user",
+                  "type": "string"
+                },
+                "last": {
+                  "description": "The last name of the user",
+                  "type": "string"
+                },
+                "phone": {
+                  "description": "The phone number of the user",
+                  "type": "integer"
+                },
+                "email": {
+                  "description": "The email of the user",
+                  "type": "string"
+                },
+                "password": {
+                  "description": "The password of the user",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid request"
+          },
+          "500": {
+            "description": "databse error"
+          }
+        }
+      },
+      "delete": {
+        "description": "delete all users from the database",
+        "responses": {
+          "204": {
+            "description": "all users deleted"
+          },
+          "500": {
+            "description": "databse error"
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "description": "Get one user from the database",
+        "parameters": [
+          {
+            "$ref": "#/parameters/id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "object",
+              "required": [
+                "_id",
+                "first",
+                "last",
+                "phone",
+                "email",
+                "password"
+              ],
+              "properties": {
+                "_id": {
+                  "description": "The id of the user",
+                  "type": "string"
+                },
+                "first": {
+                  "description": "The first name of the user",
+                  "type": "string"
+                },
+                "last": {
+                  "description": "The last name of the user",
+                  "type": "string"
+                },
+                "phone": {
+                  "description": "The phone number of the user",
+                  "type": "integer"
+                },
+                "email": {
+                  "description": "The email of the user",
+                  "type": "string"
+                },
+                "password": {
+                  "description": "The password of the user",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No user for that ID"
+          },
+          "400": {
+            "description": "invalid request"
+          },
+          "500": {
+            "description": "databse error"
+          }
+        }
+      },
+      "put": {
+        "description": "Update one user in the database",
+        "parameters": [
+          {
+            "$ref": "#/parameters/id"
+          },
+          {
+            "name": "user",
+            "in": "body",
+            "required": true,
+            "description": "user info",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "description": "The first name of the user",
+                  "type": "string"
+                },
+                "last": {
+                  "description": "The last name of the user",
+                  "type": "string"
+                },
+                "phone": {
+                  "description": "The phone number of the user",
+                  "type": "integer"
+                },
+                "email": {
+                  "description": "The email of the user",
+                  "type": "string"
+                },
+                "password": {
+                  "description": "The password of the user",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user updated",
+            "schema": {
+              "type": "object",
+              "required": [
+                "_id",
+                "first",
+                "last",
+                "phone",
+                "email",
+                "password"
+              ],
+              "properties": {
+                "_id": {
+                  "description": "The id of the user",
+                  "type": "string"
+                },
+                "first": {
+                  "description": "The first name of the user",
+                  "type": "string"
+                },
+                "last": {
+                  "description": "The last name of the user",
+                  "type": "string"
+                },
+                "phone": {
+                  "description": "The phone number of the user",
+                  "type": "integer"
+                },
+                "email": {
+                  "description": "The email of the user",
+                  "type": "string"
+                },
+                "password": {
+                  "description": "The password of the user",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "user does not exist"
+          },
+          "400": {
+            "description": "invalid request"
+          },
+          "500": {
+            "description": "databse error"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete one user from the database",
+        "parameters": [
+          {
+            "$ref": "#/parameters/id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "success"
+          },
+          "400": {
+            "description": "user not deleted"
+          },
+          "500": {
+            "description": "databse error"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "description": "attempt a login",
+        "parameters": [
+          {
+            "name": "account",
+            "in": "body",
+            "required": true,
+            "description": "login info",
+            "schema": {
+              "type": "object",
+              "required": [
+                "email",
+                "password"
+              ],
+              "properties": {
+                "email": {
+                  "description": "The email of the user",
+                  "type": "string"
+                },
+                "password": {
+                  "description": "The password of the user",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful login",
+            "schema": {
+              "type": "object",
+              "required": [
+                "first",
+                "last",
+                "phone",
+                "email",
+                "password"
+              ],
+              "properties": {
+                "_id": {
+                  "description": "The id of the user",
+                  "type": "string"
+                },
+                "first": {
+                  "description": "The first name of the user",
+                  "type": "string"
+                },
+                "last": {
+                  "description": "The last name of the user",
+                  "type": "string"
+                },
+                "phone": {
+                  "description": "The phone number of the user",
+                  "type": "integer"
+                },
+                "email": {
+                  "description": "The email of the user",
+                  "type": "string"
+                },
+                "password": {
+                  "description": "The password of the user",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "user does not exist"
+          },
+          "400": {
+            "description": "invalid request"
+          },
+          "401": {
+            "description": "unauthorized"
+          },
+          "500": {
+            "description": "databse error"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "id": {
+      "name": "id",
+      "description": "the id of the user",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    }
+  }
+}

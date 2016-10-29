@@ -1,0 +1,38 @@
+---
+version: '2'
+
+services:
+
+  nginx:
+    restart: always
+    build: ./nginx
+    ports:
+      - "8080:80"
+    networks:
+      - crave
+
+  mongodb:
+    image: mongo:latest
+    volumes:
+      - ../userService/mongo_data:/data/db
+    ports:
+      - "27017"
+    networks:
+      - crave
+
+  users:
+    build: ./userService
+    ports:
+      - "80"
+    networks:
+      - crave
+
+  recipe:
+    build: ./recipeService
+    ports:
+      - "80"
+    networks:
+      - crave
+
+networks:
+  crave:

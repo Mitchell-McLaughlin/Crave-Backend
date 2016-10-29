@@ -1,0 +1,16 @@
+{
+	"mongodb": {
+		"hosts": [
+	        {
+	            "host": "mongodb",
+	            "port": "27017"
+	        }
+	    ]
+	},
+	"apis": {
+		"recipe": {
+			"endpoint": "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com",
+			"key": "9wCpghPDermshQoiiFV9YM7jyV77p1FZboGjsne4dPR3zFUm93"
+		}
+	}
+}

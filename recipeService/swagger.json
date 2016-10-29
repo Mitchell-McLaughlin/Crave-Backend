@@ -1,0 +1,253 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Recipe Service",
+    "description": "Performs the create/read/update/delete (CRUD) operations on a recipe resource"
+  },
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/recipes": {
+      "get": {
+        "description": "Get all recipes in the database",
+        "responses": {
+          "200": {
+            "description": "successful response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "_id",
+                  "name"
+                ],
+                "properties": {
+                  "_id": {
+                    "description": "The id of the recipe",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "The name of the recipe",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "no recipes in the database"
+          },
+          "400": {
+            "description": "invalid request"
+          },
+          "500": {
+            "description": "database error"
+          }
+        }
+      },
+      "post": {
+        "description": "add a recipe into the database",
+        "parameters": [
+          {
+            "name": "recipe",
+            "in": "body",
+            "required": true,
+            "description": "recipe info",
+            "schema": {
+              "type": "object",
+              "required": [
+                "name"
+              ],
+              "properties": {
+                "_id": {
+                  "description": "The id of the recipe",
+                  "type": "string"
+                },
+                "name": {
+                  "description": "The name of the recipe",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "recipe added",
+            "headers": {
+              "location": {
+                "description": "id retured by the database",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "type": "object",
+              "required": [
+                "name"
+              ],
+              "properties": {
+                "_id": {
+                  "description": "The id of the recipe",
+                  "type": "string"
+                },
+                "name": {
+                  "description": "The name of the recipe",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid request"
+          },
+          "500": {
+            "description": "database error"
+          }
+        }
+      },
+      "delete": {
+        "description": "delete all recipes from the database",
+        "responses": {
+          "204": {
+            "description": "all recipes deleted"
+          },
+          "500": {
+            "description": "database error"
+          }
+        }
+      }
+    },
+    "/recipe/{id}": {
+      "get": {
+        "description": "Get one recipe from the database",
+        "parameters": [
+          {
+            "$ref": "#/parameters/id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "object",
+              "required": [
+                "_id",
+                "name"
+              ],
+              "properties": {
+                "_id": {
+                  "description": "The id of the recipe",
+                  "type": "string"
+                },
+                "name": {
+                  "description": "The name of the recipe",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No recipe for that ID"
+          },
+          "400": {
+            "description": "invalid request"
+          },
+          "500": {
+            "description": "database error"
+          }
+        }
+      },
+      "put": {
+        "description": "Update one recipe in the database",
+        "parameters": [
+          {
+            "$ref": "#/parameters/id"
+          },
+          {
+            "name": "recipe",
+            "in": "body",
+            "required": true,
+            "description": "recipe info",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "description": "The name of the recipe",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "recipe updated",
+            "schema": {
+              "type": "object",
+              "required": [
+                "_id",
+                "name"
+              ],
+              "properties": {
+                "_id": {
+                  "description": "The id of the recipe",
+                  "type": "string"
+                },
+                "name": {
+                  "description": "The name of the recipe",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "recipe does not exist"
+          },
+          "400": {
+            "description": "invalid request"
+          },
+          "500": {
+            "description": "database error"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete one recipe from the database",
+        "parameters": [
+          {
+            "$ref": "#/parameters/id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "success"
+          },
+          "400": {
+            "description": "recipe not deleted"
+          },
+          "500": {
+            "description": "database error"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "id": {
+      "name": "id",
+      "description": "the id of the recipe",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    }
+  }
+}

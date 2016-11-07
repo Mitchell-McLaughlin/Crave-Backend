@@ -16,37 +16,11 @@ export function id(id, callback) {
     });
 }
 
-export function first(first, callback) {
-    return shallowValidate(first, (err, result) => {
+export function name(name, callback) {
+    return shallowValidate(name, (err, result) => {
         //add buisness logic here
         return callback(err ? err : null, err ? null : result);
     });
 }
 
-export function last(last, callback) {
-    return shallowValidate(last, (err, result) => {
-        //add buisness logic here
-        return callback(err ? err : null, err ? null : result);
-    });
-}
 
-export function phone(phone, callback) {
-    return shallowValidate(phone, (err, result) => {
-        //add buisness logic here
-        return callback(err ? err : null, err ? null : result);
-    });
-}
-
-export function email(email, callback) {
-    return shallowValidate(email, (err, result) => {
-        //add buisness logic here
-        return callback(err ? err : null, err ? null : result);
-    });
-}
-
-export function password(password, callback) {
-    return shallowValidate(password, (err, result) => {
-        //add buisness logic here
-        return callback(err ? err : null, err ? null : result);
-    });
-}
